@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_height="match_parent"
+    tools:context=".SignupActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:text="SignUp"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Enter email"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:hint="enter email"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:id="@+id/etEmailReg"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Enter password"
+
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:hint="enter password"
+            android:id="@+id/etPasswordReg"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Enter vehicle id"
+
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:hint="enter vehicle id"
+            android:id="@+id/etVehicleReg"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/btnregister"
+        android:text="Register"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/btnloginn"
+        android:text="Login"
+        android:layout_height="wrap_content"/>
+
+
+
+</LinearLayout>
