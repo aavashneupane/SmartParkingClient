@@ -1,8 +1,10 @@
 package com.aavash.smartparkingclient
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -55,13 +57,16 @@ class LoginActivity : AppCompatActivity() {
 
                         // ...
                     }
+            closeKeyBoard()
         }
 
-
-
-
-
-
+    }
+    fun closeKeyBoard() {
+        val view = this.currentFocus
+        if (view != null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
     }
 
 }

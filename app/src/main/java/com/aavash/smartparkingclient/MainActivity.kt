@@ -1,6 +1,9 @@
 package com.aavash.smartparkingclient
 
+import android.app.*
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -19,8 +22,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var btnsignout:Button
-    private lateinit var tvUsers:TextView
+
 
     private lateinit var tvSlot1:TextView
     private lateinit var tvSlot2:TextView
@@ -33,11 +35,24 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnbook1:Button
     private lateinit var btnbook2:Button
     private lateinit var btnbook3:Button
+    private lateinit var btnprofile:Button
 
     private lateinit var auth: FirebaseAuth
     private lateinit var user: FirebaseUser
 
+    lateinit var notificationManager: NotificationManager
+    lateinit var notificationChannel: NotificationChannel
+    lateinit var builder: Notification.Builder
+    private val channelId="com.aavash.smartparkingclient"
+    private val description="Parking notification"
+
+    //to open notification
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        notificationManager=getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val database = FirebaseDatabase.getInstance()
         val bookedby1 = database.getReference("ParkingIOT/SLOT1/bookedby/name")
@@ -63,6 +78,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+        //val intent = Intent(this, MainActivity::class.java)
+       // val pendingIntent= PendingIntent.getActivity(this@MainActivity,0,intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
         tvSlot1=findViewById(R.id.tvslot1)
         tvSlot2=findViewById(R.id.tvslot2)
         tvSlot3=findViewById(R.id.tvslot3)
@@ -74,41 +93,39 @@ class MainActivity : AppCompatActivity() {
         btnbook1=findViewById(R.id.btnbook1)
         btnbook2=findViewById(R.id.btnbook2)
         btnbook3=findViewById(R.id.btnbook3)
+        btnprofile=findViewById(R.id.btnprofile)
 
         btnbook1.setVisibility(View.GONE)
         btnbook2.setVisibility(View.GONE)
         btnbook3.setVisibility(View.GONE)
 
-        tvUsers=findViewById(R.id.tvUsers)
-        btnsignout=findViewById(R.id.btnsignout)
+
         auth = Firebase.auth
 
         //get user instance
         user = Firebase.auth.currentUser
-        val bookeduser=user.email
+        val bookeduser=user.uid
 
         //to get user email
         if (user != null) {
                // User is signed in
-            tvUsers.setText(user.email)
+           // tvUsers.setText(user.email)
         } else {
             // No user is signed in
             Toast.makeText(this@MainActivity, "No user found. Restart the app", Toast.LENGTH_SHORT).show()
         }
 
+btnprofile.setOnClickListener {
+    startActivity(
+        Intent(
+            this@MainActivity,
+            Profile::class.java
+        )
+    )
+}
 
 
 
-        btnsignout.setOnClickListener {
-                signOut()
-            Toast.makeText(this@MainActivity, "user has been signed out", Toast.LENGTH_SHORT).show()
-            startActivity(
-                    Intent(
-                            this@MainActivity,
-                            LoginActivity::class.java
-                    )
-            )
-        }
 
         btnbook1.setOnClickListener {
 
@@ -117,12 +134,14 @@ class MainActivity : AppCompatActivity() {
             vacant1.setValue(false)
            val randomNumber1 = (9999..99999).random()
             Toast.makeText(this@MainActivity, "Enter this code in gate $randomNumber1", Toast.LENGTH_SHORT).show()
+            createNotification(randomNumber1)
+            startAlert(randomNumber1)
              getin1.setValue(randomNumber1)
 
             val handler = Handler()
             handler.postDelayed({
                 vacant1.setValue(true)
-            }, 8000)
+            }, 15000)
         }
 
            btnbook2.setOnClickListener {
@@ -131,12 +150,14 @@ class MainActivity : AppCompatActivity() {
             vacant2.setValue(false)
             val randomNumber2 = (9999..99999).random()
             Toast.makeText(this@MainActivity, "Enter this code in gate $randomNumber2", Toast.LENGTH_SHORT).show()
+               createNotification(randomNumber2)
+               startAlert(randomNumber2)
             getin2.setValue(randomNumber2)
 
                         val handler = Handler()
             handler.postDelayed({
                 vacant2.setValue(true)
-            }, 8000)
+            }, 15000)
 
         }
         btnbook3.setOnClickListener {
@@ -145,15 +166,18 @@ class MainActivity : AppCompatActivity() {
             vacant3.setValue(false)
             val randomNumber3 = (9999..99999).random()
           Toast.makeText(this@MainActivity, "Enter this code in gate $randomNumber3", Toast.LENGTH_SHORT).show()
+            createNotification(randomNumber3)
+            startAlert(randomNumber3)
             getin3.setValue(randomNumber3)
 
 
                         val handler = Handler()
             handler.postDelayed({
                 vacant3.setValue(true)
-            }, 8000)
+            }, 15000)
 
         }
+
 
 ///////////////////////// for vacant valueevent listener
 
@@ -358,9 +382,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun signOut() {
-        auth.signOut()
-    }
+
 
     private fun calculateTime(){
 
@@ -369,8 +391,54 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//    fun generateRandom(){
-//        val randomNumber = (9999..99999).random()
-//        return
-//    }
+    fun createNotification(value:Int){
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationChannel= NotificationChannel(channelId,description,NotificationManager.IMPORTANCE_HIGH)
+            notificationChannel.enableVibration(true)
+            notificationManager.createNotificationChannel(notificationChannel)
+
+
+            builder=Notification.Builder(this@MainActivity,channelId)
+                    .setContentTitle("Smart Parking")
+                    .setContentText("Your code to enter and exit is ($value). Please keep this code safe.")
+                    .setSmallIcon(R.drawable.ic_launcher_round)
+                    .setOngoing(true)
+                    // .setLargeIcon(BitmapFactory.decodeResource(this.resources,R.mipmap.ic_launcher))
+                   // .setContentIntent(pendingIntent)
+
+
+        }else
+        {
+            builder=Notification.Builder(this@MainActivity)
+                    .setContentTitle("Smart Parking")
+                    .setContentText("Your code to enter and exit is ($value).Please keep this code safe.")
+                    .setSmallIcon(R.drawable.ic_launcher_round)
+                    // .setLargeIcon(BitmapFactory.decodeResource(this.resources,R.mipmap.ic_launcher))
+                  //  .setContentIntent(pendingIntent)
+
+        }
+        notificationManager.notify(1234,builder.build())
+        }
+
+    fun startAlert(value: Int){
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle("Code Generated")
+
+        builder.setMessage("Your code to enter and exit the gate is:$value .Please keep it safe")
+        builder.setIcon(android.R.drawable.ic_dialog_alert)
+
+
+        builder.setPositiveButton("OK"){dialogInterface, which ->
+
+        }
+
+
+
+        val alertDialog: AlertDialog = builder.create()
+
+        alertDialog.setCancelable(false)
+        alertDialog.show()
+    }
 }

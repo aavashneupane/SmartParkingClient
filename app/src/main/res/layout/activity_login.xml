@@ -8,56 +8,108 @@
     android:gravity="center"
     tools:context=".LoginActivity">
 
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view1"
+        android:layout_width="360dp"
+        android:layout_height="450dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="60dp">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:gravity="center"
+            android:text="Login"
+            android:textColor="@color/black"
+            android:textSize="70sp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="180dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="Email"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/etEmailLog"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:fontFamily="sans-serif-smallcaps"
+                android:gravity="center"
+                android:hint="Enter E-mail"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="230dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="Password"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/etPasswordLog"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:fontFamily="sans-serif-smallcaps"
+                android:gravity="center"
+                android:hint="enter password"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btnlogin"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="120dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Login"
+            android:textSize="20sp" />
+
+
+    </androidx.cardview.widget.CardView>
+
     <TextView
         android:layout_width="match_parent"
-        android:text="Login"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_height="wrap_content"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"></TextView>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="Enter email"
-            android:layout_height="wrap_content"/>
-        <EditText
-            android:hint="enter email"
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:id="@+id/etEmailLog"
-            android:layout_height="wrap_content"/>
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="Enter password"
-
-            android:layout_height="wrap_content"/>
-        <EditText
-            android:hint="enter password"
-            android:layout_width="0dp"
-            android:id="@+id/etPasswordLog"
-            android:layout_weight="3"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:id="@+id/btnlogin"
-        android:text="Login"
-        android:layout_height="wrap_content"/>
 
 
 
