@@ -125,12 +125,19 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:fontFamily="sans-serif-smallcaps"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="Enter License"
+                android:text="License No."
 
                 android:layout_height="wrap_content"/>
             <EditText
+                android:fontFamily="sans-serif-smallcaps"
+                android:textColor="@color/black"
+                android:textSize="12sp"
                 android:hint="enter License no"
                 android:id="@+id/etLicenseReg"
                 android:layout_width="0dp"

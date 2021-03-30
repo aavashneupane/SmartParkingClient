@@ -5,21 +5,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:layout_height="match_parent"
     tools:context=".Profile">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content">
 
         <TextView
+            android:fontFamily="sans-serif-smallcaps"
+            android:textColor="@color/black"
+            android:textSize="18sp"
             android:id="@+id/tvUsers"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="wrap_content"
             />
         <Button
+            android:fontFamily="sans-serif-smallcaps"
+            android:textColor="@color/black"
+            android:textSize="18sp"
             android:id="@+id/btnsignout"
             android:layout_width="0dp"
             android:layout_weight="2"
@@ -32,20 +40,31 @@
     </LinearLayout>
 
     <LinearLayout
+
         android:layout_width="wrap_content"
         android:orientation="horizontal"
         android:layout_height="match_parent">
 
         <TextView
+            android:fontFamily="sans-serif-smallcaps"
+            android:textColor="@color/black"
+            android:textSize="18sp"
             android:layout_width="match_parent"
             android:text="Amount Left: "
             android:layout_height="wrap_content"/>
         <TextView
             android:layout_width="match_parent"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textColor="@color/black"
+            android:textSize="18sp"
             android:id="@+id/tvamount"
             android:layout_height="wrap_content"/>
 
 
     </LinearLayout>
+
+
+
+
 
 </LinearLayout>

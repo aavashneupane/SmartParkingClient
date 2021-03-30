@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -128,6 +129,8 @@ btnprofile.setOnClickListener {
 
 
         btnbook1.setOnClickListener {
+            val dateNow = Calendar.getInstance().time
+            Toast.makeText(this@MainActivity, "Your checkin time is $dateNow. Please Proceed", Toast.LENGTH_LONG).show()
 
             bookedby1.setValue(bookeduser)
             Toast.makeText(this@MainActivity, "Booked by $bookeduser in slot 1 for 5 minutes", Toast.LENGTH_SHORT).show()
@@ -141,7 +144,7 @@ btnprofile.setOnClickListener {
             val handler = Handler()
             handler.postDelayed({
                 vacant1.setValue(true)
-            }, 15000)
+            }, 120000)
         }
 
            btnbook2.setOnClickListener {
@@ -157,7 +160,7 @@ btnprofile.setOnClickListener {
                         val handler = Handler()
             handler.postDelayed({
                 vacant2.setValue(true)
-            }, 15000)
+            }, 120000)
 
         }
         btnbook3.setOnClickListener {
@@ -174,7 +177,7 @@ btnprofile.setOnClickListener {
                         val handler = Handler()
             handler.postDelayed({
                 vacant3.setValue(true)
-            }, 15000)
+            }, 120000)
 
         }
 
